@@ -4,10 +4,12 @@ import java.net.Socket;
 
 public class serverMain {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) 
+			throws IOException {
 		try 
 		{
 			final int PORT = 6677;//SET NEW CONSTANT VARIABLE: PORT
+			@SuppressWarnings("resource")
 			ServerSocket server = new ServerSocket(PORT); //SET PORT NUMBER
 			System.out.println("Waiting for clients...");//AT THE START PRINT THIS
 		
