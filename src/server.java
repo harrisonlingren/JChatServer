@@ -6,8 +6,9 @@ public class server
 	implements Runnable{
 
 	private Socket socket;//SOCKET INSTANCE VARIABLE
-	private Scanner in;
-	
+	Scanner in;
+	PrintWriter out;
+	String user;
 	
 	public server(Socket s)
 	{
@@ -20,19 +21,15 @@ public class server
 		try //HAVE TO HAVE THIS FOR THE in AND out VARIABLES
 		{
 			in = new Scanner(socket.getInputStream());//GET THE SOCKETS INPUT STREAM (THE STREAM THAT YOU WILL GET WHAT THEY TYPE FROM)
-			PrintWriter out = new PrintWriter(socket.getOutputStream());//GET THE SOCKETS OUTPUT STREAM (THE STREAM YOU WILL SEND INFORMATION TO THEM FROM)
-			
-			out.println("Enter username:  ");
-			
-			String user = in.next();
+			out = new PrintWriter(socket.getOutputStream());//GET THE SOCKETS OUTPUT STREAM (THE STREAM YOU WILL SEND INFORMATION TO THEM FROM)
 			
 			while (true)//WHILE THE PROGRAM IS RUNNING
 			{		
 				if (in.hasNext())
 				{
 					String input = in.nextLine();//IF THERE IS INPUT THEN MAKE A NEW VARIABLE input AND READ WHAT THEY TYPED
-					System.out.println(user+": " + input);//PRINT IT OUT TO THE SCREEN
-					out.println(user+": " + input);//RESEND IT TO THE CLIENT
+					System.out.println(input);//PRINT IT OUT TO THE SCREEN
+					out.println(input);//RESEND IT TO THE CLIENT
 					out.flush();//FLUSH THE STREAM
 				}
 			}
